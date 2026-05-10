@@ -71,9 +71,13 @@ relational facts, not absolute ones.
 
 Formally, the quantum state $\rho(S \vert O)$ is indexed to the
 observing system $O$.
-The relational network $\Gamma_S$ encodes the full graph of systems
+The relational network $\Gamma_S$ encodes the set of systems
 with which $S$ has exchanged interactions, and it is this network that
 determines which properties of $S$ are actualized and for whom.
+In the present work $\Gamma_S$ is treated as an ordered set of
+interaction events rather than a full graph-theoretic structure;
+the extension to a weighted interaction graph, in which edge weights
+carry coupling strengths, is reserved for future development.
 Two consequences follow immediately.
 First, the quantum state is not a representation of objective reality
 independent of an observational context; it is an encoding of the
@@ -82,6 +86,12 @@ Second, entanglement is not a peculiarity to be explained away but the
 \emph{canonical} form of relational existence: a system whose properties
 are maximally correlated with another is, in the fullest quantum sense,
 maximally related to it.
+What is colloquially called ``spooky action at a distance'' is, on this
+view, not a mysterious nonlocal connection between otherwise independent
+objects; it is the direct signature of a constitutive relation ---
+the two systems are not separately real things that happen to be
+correlated, but are jointly and mutually defined through their
+interaction history encoded in $\Gamma_S$.
 
 This ontological picture leaves open a critical question: \emph{how}
 does the web of relational facts stabilize into the appearance of a
@@ -127,6 +137,14 @@ is the reduced density matrix of $S$.
 Equation~\eqref{eq:lindblad} is the most general Markovian,
 trace-preserving, completely positive evolution for an open quantum
 system.
+The Markovian approximation --- valid when environmental correlation
+times are short compared to the system's coherence time --- is standard
+for superconducting qubit platforms operating at dilution-refrigerator
+temperatures~\cite{Krantz2019}, and is adopted throughout this work.
+Non-Markovian corrections introduce memory kernels that would complicate
+the Affinity Tensor dynamics without qualitatively altering the
+coherence-loss mechanism the \RCT~characterizes; their treatment is
+deferred to future work.
 
 The signature of decoherence is the exponential suppression of the
 off-diagonal elements of $\rho_S$ in a preferred basis.
@@ -163,6 +181,15 @@ superselection)~\cite{Zurek2003} answers this from first principles
 and is essential to grounding the Affinity Tensor defined in
 Sec.~\ref{sec:rct}.
 
+For the dephasing model simulated in Sec.~\ref{sec:sim}, the
+system-environment coupling takes the prototypical form
+$H_{\mathrm{int}} = g\,\sigma_z \otimes \hat{B}_E$,
+where $\sigma_z$ is the Pauli-$Z$ operator on $S$ and
+$\hat{B}_E$ is a bath observable; the two-qubit extension is
+$H_{\mathrm{int}} = g\,(\sigma_z \otimes \sigma_z) \otimes \hat{B}_E$.
+This diagonal coupling drives pure dephasing without energy relaxation
+and directly determines the pointer basis via einselection.
+
 The interaction Hamiltonian $H_{\mathrm{int}}$ generically commutes
 with a preferred set of system observables whose eigenstates are
 the \emph{pointer states} $\{\vert \pi_k \rangle\}$:
@@ -182,6 +209,13 @@ states at the rates $\Gamma_{ij}$; the pointer states themselves
 persist.
 The environment thus \emph{selects} this basis --- hence
 ``einselection'' --- independently of any experimental choice.
+This is a physically decisive point: the role traditionally assigned
+to the ``observer'' is played here by the environment itself --- a
+concrete physical system governed by the same Hamiltonian dynamics as
+$S$, not an epistemological agent standing outside the formalism.
+The classical world is not revealed by conscious observation; it is
+\emph{produced} by physical interaction, in direct consonance with the
+relational ontology of RQM.
 
 Einselection has two consequences essential to the present work.
 First, it provides a physically grounded, basis-independent definition
