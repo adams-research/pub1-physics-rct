@@ -24,32 +24,36 @@ complete decoherence and maximum pointer-basis coherence; and
 redistributing local coherence into $S$-$E$ correlations rather than
 annihilating it.
 We begin with the definitions that underpin all four propositions,
-drawing a careful distinction between the full tensorial object and the
-scalar summary statistic --- a distinction that will be essential in
-Sec.~\ref{sec:gate} when we parameterize the $\URA$ gate.
+drawing a careful distinction between the full tensorial object
+$\alpha(S,E)$ and the scalar summary $\bar{\alpha}(S,E)$ --- a
+distinction that will be essential in Sec.~\ref{sec:gate}, where the
+$\URA(\theta)$ gate's exchange angle is shown to be a Hamiltonian
+evolution variable distinct from $\bar{\alpha}$ and related to it
+indirectly through Proposition~\ref{prop:conservation}.
 
 % ── III.A Formal Definitions ─────────────────────────────────────────────────
 
 \subsection{\label{sec:definitions}Formal Definitions}
 
-\begin{definition}[Relational Density Matrix]
+\begin{definition}[Joint and Reduced States]
 \label{def:rho}
 Let $S$ and $E$ be quantum systems with Hilbert spaces
-$\mathcal{H}_S$ and $\mathcal{H}_E$ respectively, and let
-$\rho_{SE} \in \mathcal{L}(\mathcal{H}_S \otimes \mathcal{H}_E)$
-be the joint density matrix.
-The \emph{relational density matrix of $S$ given $E$} is
-
+$\mathcal{H}_S$ and $\mathcal{H}_E$ respectively.
+The \emph{joint state} is the density operator
+$\rho_{SE} \in \mathcal{L}(\mathcal{H}_S \otimes \mathcal{H}_E)$,
+and the \emph{reduced state of $S$} is
 \begin{equation}
 \label{eq:rho-def}
-\rhoSE \;\equiv\; \rho_{SE},
+  \rho_S \;\equiv\; \mathrm{Tr}_E[\rho_{SE}],
 \end{equation}
-
-understood as the state of $S$ defined only in the context of
-its relational network with $E$.
-The reduced density matrix $\rho_S = \mathrm{Tr}_E[\rhoSE]$
-represents the locally accessible information about $S$
-after $E$'s degrees of freedom are traced out.
+the locally accessible state of $S$ after $E$'s degrees of freedom
+are traced out.
+The relational character of the framework enters not through a
+separate notational object but through the construction of the
+Affinity Tensor below: $\alpha(S,E)$ is defined from $\rho_S$ in
+the pointer basis selected by the $S$-$E$ coupling
+(Sec.~\ref{sec:decoherence}), so its value is intrinsically indexed
+to $E$.
 \end{definition}
 
 \begin{definition}[Affinity Tensor]
@@ -123,13 +127,19 @@ The Affinity Tensor $\alpha(S,E)$ and the scalar affinity
 $\bar{\alpha}(S,E)$ serve distinct roles throughout this paper.
 $\alpha(S,E)$ is a matrix that encodes the full coherence
 structure of $S$ --- the magnitude and phase of every off-diagonal
-element --- and appears in the proof of Proposition~\ref{prop:correspondence}
-and in the parameterization of $\URA$ (Sec.~\ref{sec:gate}).
-$\bar{\alpha}(S,E)$ is the single scalar that collapses this
-structure to a coherence magnitude; it is the quantity that
-transitions continuously from $1$ (maximally coherent, fully
-quantum-relational) to $0$ (fully decohered, classically definite)
-and that appears in the statement of all four propositions.
+element --- and appears in the proof of
+Proposition~\ref{prop:correspondence}.
+$\bar{\alpha}(S,E)$ is the single scalar that collapses this structure
+to a coherence magnitude; it is the quantity that transitions
+continuously from $1$ (maximally coherent, fully quantum-relational)
+to $0$ (fully decohered, classically definite), appears in the
+statement of all four propositions, and provides the
+circuit-level coherence budget interpretation that motivates the
+$\URA(\theta)$ gate of Sec.~\ref{sec:gate}.
+Neither $\alpha(S,E)$ nor $\bar{\alpha}(S,E)$ enters $\URA(\theta)$ as
+a parameter: the gate's exchange angle $\theta$ is a Hamiltonian
+evolution variable distinct from the scalar coherence measure
+(see Sec.~\ref{sec:gate} for the precise relationship).
 \end{remark}
 
 % ── III.B  Proposition I ─────────────────────────────────────────────────────
@@ -450,15 +460,22 @@ has been destroyed --- it has been redistributed into the
 distinguishability of $\{\vert E_k\rangle\}$.
 \end{proof}
 
-\begin{remark}[Implications for quantum error correction]
+\begin{remark}[Coherence as a circuit-level resource]
 Proposition~\ref{prop:conservation} has a direct bearing on the
 design of the $\URA$ gate (Sec.~\ref{sec:gate}).
 Because decoherence transfers, rather than destroys, relational
-structure, a gate that maximizes $\bar{\alpha}$ effectively
-harvests coherence before it disperses into environmental branches.
-The conservation law quantifies the recovery potential: at time $t$,
-the coherence remaining in $\rho_S$ is precisely
-$\bar{\alpha}(t) = \bar{\alpha}(0)\,e^{-\gamma t}$, setting
-a hard upper bound on what any unitary operation on $S$ alone
-can restore without access to $E$.
+structure, the local pointer-basis coherence
+$\bar{\alpha}(t) = \bar{\alpha}(0)\,e^{-\gamma t}$ available at time $t$
+is a finite, monotonically depleting budget.
+A two-qubit entangling operation expends a portion of this budget per
+gate by redistributing local coherence into $S$-$E$ correlations
+[Eq.~\eqref{eq:coherence-transfer}]; an operation acting below its
+maximum entanglement capability expends a smaller portion, leaving more
+coherence available for downstream layers.
+The conservation law also sets a hard upper bound: no unitary acting on
+$S$ alone (without access to $E$) can increase $\bar{\alpha}(t)$ above
+its current value, so the coherence-preservation strategy is to
+\emph{spend less per gate}, not to attempt local recovery.
+This is the operational content the $\URA(\theta)$ gate of
+Sec.~\ref{sec:gate} exploits.
 \end{remark}

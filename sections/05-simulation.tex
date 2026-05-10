@@ -5,7 +5,7 @@
 
 \subsection{Implementation}
 
-We implement $\URA(\alpha)$ as a two-qubit unitary operator via the
+We implement $\URA(\theta)$ as a two-qubit unitary operator via the
 explicit matrix form of Eq.~\eqref{eq:URA-matrix} in both
 Qiskit~\cite{Qiskit2024} (IBM) and Cirq~\cite{Cirq2025} (Google).
 Simulation parameters follow Appendix~\ref{app:sim-params}.
@@ -13,7 +13,7 @@ The circuit representation is:
 
 \begin{center}
 \begin{quantikz}
-  \lstick{$\ket{0}$} & \gate[2]{U_{\mathrm{RA}}(\alpha)} & \qw \\
+  \lstick{$\ket{0}$} & \gate[2]{U_{\mathrm{RA}}(\theta)} & \qw \\
   \lstick{$\ket{0}$} &                                    & \qw
 \end{quantikz}
 \end{center}
@@ -23,8 +23,10 @@ Performance is benchmarked against three fixed two-qubit gates~---~\textsc{cnot}
 \textsc{iswap}, and \textsc{cz}~---~which are the standard entangling
 primitives on IBM and Google hardware respectively.
 The key distinction is that these fixed gates always operate at full
-entanglement capability ($\bar\alpha = 1$), whereas $\URA(\alpha)$
-operates at $\bar\alpha = |\sin 2\alpha|$ (Eq.~\ref{eq:entcap-result}).
+entanglement capability ($\mathcal{E} = 1$), whereas $\URA(\theta)$
+operates at $\mathcal{E}(\theta) = |\sin 2\theta|$
+(Eq.~\eqref{eq:entcap-result}), continuously tunable via the exchange
+angle.
 
 \subsection{Noise Models and Gate-Time Scaling}
 
@@ -47,28 +49,28 @@ near-term superconducting qubit devices:
 A critical physical consideration governs the comparison.
 On superconducting qubit hardware, two-qubit gate error accumulates in
 proportion to gate duration~\cite{Krantz2019}.
-The Heisenberg exchange interaction implementing $\URA(\alpha)$ has
-duration proportional to~$\alpha$: running at $\alpha = \pi/8$ takes
-half the time of a full $\alpha = \pi/4$ (\textsc{iswap}) operation.
+The Heisenberg exchange interaction implementing $\URA(\theta)$ has
+duration proportional to~$\theta$: running at $\theta = \pi/8$ takes
+half the time of a full $\theta = \pi/4$ (\textsc{iswap}) operation.
 We therefore apply \emph{gate-time-proportional noise}: fixed gates
 (\textsc{cnot}, \textsc{iswap}, \textsc{cz}) receive error rate~$p_{\rm base}$
-at full duration, while $\URA(\alpha)$ receives effective rate
+at full duration, while $\URA(\theta)$ receives effective rate
 \begin{equation}
-  p_{\rm eff}(\alpha) = p_{\rm base} \times \frac{\alpha}{\pi/4},
+  p_{\rm eff}(\theta) = p_{\rm base} \times \frac{\theta}{\pi/4},
   \label{eq:peff}
 \end{equation}
-reflecting shorter physical operation time for $\alpha < \pi/4$.
+reflecting shorter physical operation time for $\theta < \pi/4$.
 
 \subsection{Results}
 
 \textbf{Gate fidelity advantage.}
 Table~\ref{tab:fidelity} reports the average gate fidelity of each gate
 under depolarizing noise with gate-time-proportional error scaling.
-$\URA(\pi/4)$ (full duration, $\alpha = \pi/4$) operates at maximum
+$\URA(\pi/4)$ (full duration, $\theta = \pi/4$) operates at maximum
 entanglement capability ($\mathcal{E} = 1$) and, as the maximally entangling
 point of the Heisenberg diagonal (Sec.~\ref{subsec:weyl}), matches the
 fidelity of \textsc{iswap} under gate-time-proportional noise at equal duration.
-$\URA(\pi/8)$ (half duration, $\alpha = \pi/8$) achieves measurable
+$\URA(\pi/8)$ (half duration, $\theta = \pi/8$) achieves measurable
 advantages: $+1.87\%$ at $p_{\rm base} = 0.05$ and $+3.75\%$ at
 $p_{\rm base} = 0.10$ over all three fixed gates under depolarizing noise.
 
@@ -118,23 +120,26 @@ Amplitude damp. & $+0.0080$ & $+0.0195$ & $+0.0395$ \\
 \end{tabular}
 \end{table}
 
-\textbf{Interpretation via the Affinity Tensor.}
-The results are naturally interpreted through the \RCT.
-A gate operating at $\alpha < \pi/4$ implements a weaker relational
-coupling~---~lower $\bar\alpha$~---~and consequently requires less
-physical interaction time with the environment, accumulating less
-decoherence.
-For tasks that require partial entanglement ($\bar\alpha < 1$), or for
-circuits where entanglement is built incrementally across gate layers,
-$\URA(\alpha)$ can be tuned to the coherence regime of the device:
-low $\alpha$ in high-noise environments preserves relational coherence
-that a maximally entangling fixed gate would destroy.
-
-This is not merely an engineering observation but a direct prediction of
-Proposition~\ref{prop:correspondence}: the degree of relational
-participation ($\bar\alpha$) should be matched to the coherence budget
-of the physical substrate.
-The simulation confirms this prediction numerically.
+\textbf{Interpretation via the \RCT.}
+The fidelity advantage is naturally interpreted through the
+conservation law of Proposition~\ref{prop:conservation}.
+A gate operating at $\theta < \pi/4$ implements a weaker exchange
+interaction and consequently requires less physical interaction time
+with the bath, accumulating less decoherence per operation.
+Operationally, this means a smaller fraction of the local pointer-basis
+coherence budget $\bar\alpha$ (Definition~\ref{def:alpha-scalar}) is
+expended into $S$-bath correlations during the gate, leaving more
+coherence available for downstream layers~---~exactly the redistribution
+quantified by Eq.~\eqref{eq:coherence-transfer}.
+For circuits requiring partial entanglement, or in which entanglement
+is built incrementally across layers, $\URA(\theta)$ can therefore be
+tuned to the coherence regime of the device: small $\theta$ in
+high-noise environments preserves coherence that a fixed maximally
+entangling gate would dissipate.
+The \RCT~contributes the conceptual warrant for this design~---~that
+relational coupling is a continuous, conservatively redistributed
+resource rather than a binary primitive~---~while the numerics confirm
+the predicted gate-time scaling.
 
 \textbf{$\bar\alpha(t)$ dynamics.}
 Figure~\ref{fig:alpha-dynamics} shows the decay of $\bar\alpha(t)$ for a

@@ -221,24 +221,24 @@ The ``lost'' coherence is not destroyed; it is encoded in the
 relational network $\Gamma_S$ (Sec.~\ref{sec:rqm}) as $S$-$E$
 entanglement. $\square$
 
-\subsection{Weyl Chamber Coordinates for $\URA(\alpha)$}
+\subsection{Weyl Chamber Coordinates for $\URA(\theta)$}
 
 The local invariants of a two-qubit gate $U \in \mathrm{SU}(4)$ are
 computed from the matrix $M = U^T_B U_B$ in the Bell basis, where
 $U_B = \frac{1}{\sqrt{2}}\begin{pmatrix}1&0&0&i\\0&i&1&0\\0&i&{-1}&0\\1&0&0&{-i}\end{pmatrix}$~\cite{Zhang2003WeylChamber}.
 
-For $\URA(\alpha)$ defined by Eq.~\eqref{eq:URA}, direct computation gives
-$M = \mathrm{diag}(e^{-i\alpha}, e^{i\alpha}, e^{i\alpha}, e^{-i\alpha})$
+For $\URA(\theta)$ defined by Eq.~\eqref{eq:URA}, direct computation gives
+$M = \mathrm{diag}(e^{-i\theta}, e^{i\theta}, e^{i\theta}, e^{-i\theta})$
 in the Bell basis, yielding Weyl coordinates:
 \begin{equation}
-  (c_1, c_2, c_3) = (\alpha, \alpha, \alpha), \quad \alpha \in [0, \pi/2].
+  (c_1, c_2, c_3) = (\theta, \theta, \theta), \quad \theta \in [0, \pi/2].
   \label{eq:weyl-full}
 \end{equation}
 This trajectory lies entirely within the \textsc{iswap} family of gates,
 confirming that $\URA$ is an isotropic exchange gate continuously
-interpolating from the identity ($\alpha = 0$) to the \textsc{swap}
-gate ($\alpha = \pi/2$), with maximum entanglement capability at
-$\alpha = \pi/4$ (the \textsc{iswap} point).
+interpolating from the identity ($\theta = 0$) to the \textsc{swap}
+gate ($\theta = \pi/2$), with maximum entanglement capability at
+$\theta = \pi/4$ (the \textsc{iswap} point).
 
 \subsection{Simulation Parameters}
 \label{app:sim-params}
@@ -248,7 +248,7 @@ All simulations use the following configuration unless otherwise noted.
 \textbf{Qiskit (IBM):} \texttt{qiskit-terra} v0.45, \texttt{qiskit-aer} v0.13.
 Two-qubit system; $10^4$ shots per circuit; state vector simulation for
 process fidelity; density matrix simulation for noise models.
-Gate decomposition: $\URA(\alpha)$ compiled via \texttt{transpile} with
+Gate decomposition: $\URA(\theta)$ compiled via \texttt{transpile} with
 optimization level~3 to the $\{R_Z, \sqrt{X}, \textsc{cx}\}$ native gate set.
 
 \textbf{Cirq (Google):} \texttt{cirq-core} v1.3.

@@ -10,23 +10,30 @@ quantum properties are not intrinsic to systems but emerge through relational
 interaction~\cite{Rovelli1996}.
 We formalize this relational structure through the \emph{Relational Coherence
 Theorem} (\RCT), which introduces the \emph{Affinity Tensor}~$\alpha(S,E)$
-as a measure of quantum coherence defined over the off-diagonal elements of the
-relational density matrix~$\rhoSE$.
+as a measure of quantum coherence built from the off-diagonal elements of
+the reduced state $\rho_S$ in the einselected pointer basis, with scalar
+summary $\bar\alpha(S,E) \in [0,1]$.
 
 The \RCT\ comprises four propositions:
-property indefiniteness (no quantum property exists independently of relational
-context), relational determination (definite properties emerge through the
-relational network~$\Gamma_S$), coherence--affinity correspondence
-($\alpha = 1$ corresponds to maximal entanglement; $\alpha = 0$ to full
-decoherence), and conservation of relational potential (total quantum information
-is conserved in closed systems).
+property indefiniteness (a nonzero $\bar\alpha$ precludes any definite
+pointer-state assignment), relational determination ($\bar\alpha$ decays
+exponentially under Markovian dephasing), coherence--affinity correspondence
+($\bar\alpha = 1$ at the equal-weight pointer-basis superposition,
+$\bar\alpha = 0$ at full pointer-basis decoherence), and conservation of
+relational potential (under closed-system unitary evolution, local coherence
+is redistributed into $S$-$E$ correlations rather than destroyed).
 
-From the \RCT\ we derive the \emph{Relational Affinity Gate}~$\URA(\alpha)$,
-a continuously parameterized two-qubit gate belonging to the~$\mathrm{iSWAP}$
-family in $\mathrm{SU}(4)/\text{local operations}$, optimized for coherence
-preservation under environmental decoherence.
-Numerical simulations in Qiskit and Cirq compare~$\URA$ against
+Motivated by the \RCT, we introduce the \emph{Relational Affinity
+Gate}~$\URA(\theta) = \exp[-i\theta(\sigma_x{\otimes}\sigma_x +
+\sigma_y{\otimes}\sigma_y + \sigma_z{\otimes}\sigma_z)/2]$,
+a continuously parameterized two-qubit gate on the Heisenberg-exchange
+diagonal of the Weyl chamber of $\mathrm{SU}(4)/[\mathrm{SU}(2)\otimes\mathrm{SU}(2)]$
+with exchange angle $\theta \in [0,\pi/2]$.
+Numerical simulations in Qiskit and Cirq compare~$\URA(\theta)$ against
 \textsc{cnot}, \textsc{iswap}, and \textsc{cz} under depolarizing, dephasing,
 and amplitude damping noise models.
-$\URA$~demonstrates measurable fidelity advantages in high-decoherence regimes,
-suggesting utility in near-term quantum devices.
+On hardware where gate duration scales linearly with~$\theta$,
+$\URA(\pi/8)$ demonstrates measurable fidelity advantages
+($\Delta F = +0.019$ to $+0.040$ at $p_{\rm base} = 0.10$) over fixed
+maximally entangling gates~---~an operational expression of the
+\RCT~conservation law~---~suggesting utility in near-term quantum devices.
