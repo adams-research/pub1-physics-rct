@@ -8,13 +8,16 @@
 
 The Relational Coherence Theorem rests on two independent pillars of
 modern quantum theory: the relational structure of quantum properties,
-established empirically by Bell-inequality experiments and articulated
-philosophically by relational quantum mechanics, and the dynamical
-mechanism of environmental decoherence, which governs how that
+established empirically by Bell-inequality
+experiments~\cite{Bell1964,Aspect1982,Zeilinger2023Nobel} and
+articulated philosophically by relational quantum
+mechanics~\cite{Rovelli1996,Rovelli2021}, and the dynamical mechanism
+of environmental decoherence~\cite{Zurek2003}, which governs how that
 relational structure evolves toward the classical limit.
 This section reviews each pillar in turn, concluding with Zurek's
-theory of einselection, which supplies the physical grounding for
-the pointer basis in which the Affinity Tensor is later defined.
+theory of einselection~\cite{Zurek2003}, which supplies the physical
+grounding for the pointer basis in which the Affinity Tensor is later
+defined.
 
 % ── II.A ─────────────────────────────────────────────────────────────────────
 
@@ -39,10 +42,15 @@ Aspect, Grangier, and Roger in 1982~\cite{Aspect1982}, who reported
 violations of the CHSH bound by more than nine standard deviations in
 polarization-entangled photon pairs.
 Subsequent experiments across multiple platforms closed successive
-loopholes --- fair sampling, locality, freedom of choice --- and in 2022
-the Nobel Prize in Physics recognized this body of work, with Zeilinger's
-Nobel Lecture~\cite{Zeilinger2023Nobel} providing a comprehensive
-account of loophole-free Bell tests.
+loopholes --- fair sampling, locality, and freedom of choice --- in a
+sequence of loophole-free tests using NV-center electron
+spins~\cite{Hensen2015} and entangled
+photons~\cite{Giustina2015,Shalm2015}, with the freedom-of-choice
+loophole subsequently addressed by deriving measurement settings from
+high-redshift quasar emission~\cite{Rauch2018}.
+In 2022 the Nobel Prize in Physics recognized this body of work, with
+Zeilinger's Nobel Lecture~\cite{Zeilinger2023Nobel} providing a
+comprehensive account of loophole-free Bell tests.
 
 The physical content of these results is unambiguous: no theory
 assigning predetermined, observer-independent values to quantum
@@ -74,10 +82,15 @@ observing system $O$.
 The relational network $\Gamma_S$ encodes the set of systems
 with which $S$ has exchanged interactions, and it is this network that
 determines which properties of $S$ are actualized and for whom.
-In the present work $\Gamma_S$ is treated as an ordered set of
-interaction events rather than a full graph-theoretic structure;
-the extension to a weighted interaction graph, in which edge weights
-carry coupling strengths, is reserved for future development.
+In the present work $\Gamma_S$ is treated as a collection of
+interaction events rather than a full graph-theoretic structure: the
+Affinity Tensor and its scalar summary defined in
+Sec.~\ref{sec:rct} depend only on the joint state $\rho_{SE}$ at
+the time of evaluation, so the temporal ordering of prior interaction
+events does not enter the present formalism.
+The extension to a weighted interaction graph, in which edge weights
+carry coupling strengths and event order may matter, is reserved for
+future development.
 Two consequences follow immediately.
 First, the quantum state is not a representation of objective reality
 independent of an observational context; it is an encoding of the
@@ -118,7 +131,7 @@ this coupling drives the dynamical process of decoherence.
 The evolution of the composite state $\rho_{SE}$ under a total
 Hamiltonian $H = H_S + H_E + H_{\mathrm{int}}$ is, after tracing over
 the environmental degrees of freedom, well approximated by the
-Lindblad master equation~\cite{NielsenChuang2000}:
+Lindblad master equation~\cite{Lindblad1976,GKS1976,NielsenChuang2000}:
 
 \begin{equation}
 \label{eq:lindblad}
@@ -148,8 +161,15 @@ deferred to future work.
 
 The signature of decoherence is the exponential suppression of the
 off-diagonal elements of $\rho_S$ in a preferred basis.
+For a pure-dephasing environment, in which the jump operators $\{L_k\}$
+of Eq.~\eqref{eq:lindblad} are diagonal in the pointer basis selected
+by einselection (below), the dissipative term of the Lindblad equation
+reduces to a simple decay of off-diagonal density-matrix elements while
+the diagonal populations are preserved
+(the explicit calculation appears in the proof of
+Proposition~\ref{prop:determination}, Sec.~\ref{sec:prop2}).
 For an initially pure state $\rho_S(0) = \vert\psi\rangle\langle\psi\vert$,
-the coherences decay as
+the coherences then decay as
 
 \begin{equation}
 \label{eq:decoherence-decay}
@@ -237,5 +257,20 @@ drives those coherences toward zero at rate $\Gamma_{ij}$; and in
 the long-time limit the off-diagonal elements vanish entirely in the
 pointer basis ($\bar{\alpha} = 0$), leaving a classical mixture of
 pointer-state outcomes.
+Two distinct quantities are at play along this trajectory, and the
+distinction is essential to what follows.
+The scalar affinity $\bar{\alpha}$ measures the \emph{internal
+relational potential} of $S$~---~the magnitude of coherent superposition
+locally available in $\rho_S$ for relational determination~---~whereas
+the $S$-$E$ entanglement measures the \emph{actualized relational
+connection} already encoded in the joint state $\rho_{SE}$.
+At $\bar{\alpha} = 1$ the potential is maximal and the connection
+to $E$ is zero; as decoherence proceeds the potential is expended into
+$S$-$E$ correlations, and at $\bar{\alpha} = 0$ the potential is fully
+spent and the connection is maximal.
+This is why $\bar{\alpha}$, not $S$-$E$ entanglement, is the appropriate
+control parameter for the $\URA$ gate of Sec.~\ref{sec:gate}: the gate
+must act on the coherence still locally available in $S$ before that
+coherence is irretrievably distributed into the environment.
 The Affinity Tensor tracks exactly this trajectory, and the
 Relational Coherence Theorem formalizes it.
