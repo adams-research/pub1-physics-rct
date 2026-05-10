@@ -3,8 +3,7 @@
 %  "The Relational Coherence Theorem"
 %  Dr. Joshua Adams | 2026
 %
-%  STATUS: Definitions complete. Propositions stubbed.
-%          Full development in next pass.
+%  STATUS: Definitions complete. All four propositions developed.
 % ============================================================
 
 \section{\label{sec:rct}The Relational Coherence Theorem}
@@ -15,12 +14,21 @@ framework that unifies the relational ontology of
 Sec.~\ref{sec:rqm} with the decoherence dynamics of
 Sec.~\ref{sec:decoherence} through a single quantitative object:
 the Affinity Tensor $\alpha(S,E)$.
+The four propositions assert, in order: (I)~that a nonzero Affinity
+Tensor signals the absence of any definite pointer-state assignment
+for $S$; (II)~that dephasing drives the scalar affinity to zero
+exponentially, recovering the classical limit; (III)~that the scalar
+affinity ranges continuously over $[0,1]$, attaining its extremes at
+complete decoherence and maximum pointer-basis coherence; and
+(IV)~that this process conserves relational structure globally,
+redistributing local coherence into $S$-$E$ correlations rather than
+annihilating it.
 We begin with the definitions that underpin all four propositions,
 drawing a careful distinction between the full tensorial object and the
-scalar summary statistic, a distinction that will be essential in
+scalar summary statistic --- a distinction that will be essential in
 Sec.~\ref{sec:ura} when we parameterize the $\URA$ gate.
 
-% ── III.A Formal Definitions ──────────────────────────────────────────────────
+% ── III.A Formal Definitions ─────────────────────────────────────────────────
 
 \subsection{\label{sec:definitions}Formal Definitions}
 
@@ -90,7 +98,8 @@ the Affinity Tensor:
 \noindent
 where $\lVert \cdot \rVert_F$ denotes the Frobenius norm.
 The prefactor $\sqrt{d/(d-1)}$ normalizes $\bar{\alpha}$ to the
-unit interval: $\bar{\alpha} \in [0, 1]$.
+unit interval: $\bar{\alpha} \in [0, 1]$ (proven in
+Proposition~\ref{prop:correspondence}).
 \end{definition}
 
 \begin{remark}[Boundary values of $\bar{\alpha}$]
@@ -114,9 +123,8 @@ The Affinity Tensor $\alpha(S,E)$ and the scalar affinity
 $\bar{\alpha}(S,E)$ serve distinct roles throughout this paper.
 $\alpha(S,E)$ is a matrix that encodes the full coherence
 structure of $S$ --- the magnitude and phase of every off-diagonal
-element --- and appears in the proof of Proposition~III
-(Sec.~\ref{sec:prop3}) and in the parameterization of $\URA$
-(Sec.~\ref{sec:ura}).
+element --- and appears in the proof of Proposition~\ref{prop:correspondence}
+and in the parameterization of $\URA$ (Sec.~\ref{sec:ura}).
 $\bar{\alpha}(S,E)$ is the single scalar that collapses this
 structure to a coherence magnitude; it is the quantity that
 transitions continuously from $1$ (maximally coherent, fully
@@ -124,37 +132,300 @@ quantum-relational) to $0$ (fully decohered, classically definite)
 and that appears in the statement of all four propositions.
 \end{remark}
 
-% ── III.B–E  Propositions (full development: next pass) ──────────────────────
+% ── III.B  Proposition I ─────────────────────────────────────────────────────
 
 \subsection{\label{sec:prop1}Proposition~I: Property Indefiniteness}
 
-% TODO: Full development in next pass.
-% Claim: No quantum property of $S$ exists independently of a
-% relational context defined by $\Gamma_S$.
-% Proof strategy: cite Bell + Rovelli; show \bar{alpha} = 1
-% is incompatible with a definite pointer-state value.
+\begin{proposition}[Property Indefiniteness]
+\label{prop:indefiniteness}
+Let $S$ be a quantum system with pointer basis
+$\{\vert\pi_k\rangle\}$ selected by einselection
+(Sec.~\ref{sec:decoherence}).
+If $\bar{\alpha}(S,E) > 0$, then $\rho_S$ cannot be expressed as
+a convex combination of pointer-basis projectors: no definite
+pointer-state assignment exists for $S$ relative to $E$.
+\end{proposition}
+
+\begin{proof}
+Suppose for contradiction that
+$\rho_S = \sum_k p_k\,\vert\pi_k\rangle\langle\pi_k\vert$
+with $p_k \geq 0$ and $\sum_k p_k = 1$.
+Then for all $i \neq j$,
+$\langle\pi_i\vert\rho_S\vert\pi_j\rangle = p_i\,\delta_{ij} = 0$.
+By Definition~\ref{def:alpha-tensor}, every off-diagonal entry of
+$\alpha(S,E)$ vanishes, so $\alpha(S,E) = 0$ and hence
+$\bar{\alpha}(S,E) = 0$.
+Taking the contrapositive: $\bar{\alpha}(S,E) > 0$ implies $\rho_S$
+has at least one nonzero off-diagonal element in the pointer basis
+and therefore cannot be a classical mixture of pointer states.
+\end{proof}
+
+\begin{remark}[Connection to Bell nonlocality]
+Proposition~\ref{prop:indefiniteness} is the quantitative realization
+of the RQM principle of Sec.~\ref{sec:rqm}.
+Bell's theorem (Sec.~\ref{sec:bell}) establishes that quantum
+properties cannot be predetermined independently of a relational
+context; a nonzero $\bar{\alpha}$ measures precisely the residual
+superposition that no environmental observer has yet resolved into
+a definite pointer-state value.
+As $\bar{\alpha}$ approaches zero, the system transitions from the
+fully quantum-relational regime to the classically definite one.
+\end{remark}
+
+% ── III.C  Proposition II ────────────────────────────────────────────────────
 
 \subsection{\label{sec:prop2}Proposition~II: Relational Determination}
 
-% TODO: Full development in next pass.
-% Claim: Definite properties of $S$ emerge through the relational
-% network \Gamma_S via decoherence-driven einselection.
-% Proof strategy: Lindblad evolution + pointer-state stability.
+\begin{proposition}[Relational Determination]
+\label{prop:determination}
+Under Markovian dephasing [Eq.~\eqref{eq:lindblad}] with uniform
+jump operators $L_k = \sqrt{\gamma}\,\vert\pi_k\rangle\langle\pi_k\vert$
+and rate $\gamma > 0$, the scalar affinity decays exponentially:
+
+\begin{equation}
+\label{eq:alpha-decay}
+\bar{\alpha}(S,E;\,t)
+  \;=\;
+  \bar{\alpha}(S,E;\,0)\;e^{-\gamma t}.
+\end{equation}
+
+\noindent
+In particular, $\lim_{t\to\infty}\bar{\alpha}(S,E;\,t) = 0$, and the
+pointer states $\{\vert\pi_k\rangle\}$ are the unique asymptotically
+stable states of this evolution.
+\end{proposition}
+
+\begin{proof}
+With $L_k = \sqrt{\gamma}\,\vert\pi_k\rangle\langle\pi_k\vert$,
+we evaluate the dissipative part of Eq.~\eqref{eq:lindblad} for an
+off-diagonal element $\rho_{ij} \equiv \langle\pi_i\vert\rho_S\vert\pi_j\rangle$,
+$i \neq j$.
+The gain term contributes
+\begin{equation*}
+  \sum_k \gamma\,
+  \langle\pi_i\vert L_k\rho_S L_k^\dagger\vert\pi_j\rangle
+  \;=\;
+  \gamma\sum_k \delta_{ik}\,\rho_{kk}\,\delta_{kj}
+  \;=\; 0
+  \qquad (i \neq j).
+\end{equation*}
+The loss term contributes
+\begin{equation*}
+  \frac{\gamma}{2}\sum_k
+  \langle\pi_i\vert\{L_k^\dagger L_k,\,\rho_S\}\vert\pi_j\rangle
+  \;=\;
+  \frac{\gamma}{2}\sum_k\!\bigl(\delta_{ik}\,\rho_{kj}
+    + \delta_{kj}\,\rho_{ik}\bigr)
+  \;=\; \gamma\,\rho_{ij}.
+\end{equation*}
+Hence $\dot{\rho}_{ij} = -\gamma\,\rho_{ij}$, consistent with
+Eq.~\eqref{eq:decoherence-decay} at uniform rate
+$\Gamma_{ij} = \gamma$.
+Integrating: $\rho_{ij}(t) = \rho_{ij}(0)\,e^{-\gamma t}$ for all
+$i \neq j$.
+Since every off-diagonal entry carries the same exponential factor,
+\begin{equation*}
+  \bigl\lVert\alpha(S,E;\,t)\bigr\rVert_F^2
+  \;=\; \sum_{i\neq j}\bigl\lvert\rho_{ij}(t)\bigr\rvert^2
+  \;=\; e^{-2\gamma t}\,
+        \bigl\lVert\alpha(S,E;\,0)\bigr\rVert_F^2,
+\end{equation*}
+and Eq.~\eqref{eq:alpha-decay} follows from
+Definition~\ref{def:alpha-scalar}.
+Diagonal elements are preserved by this evolution (the gain and loss
+terms cancel on the diagonal), confirming that pointer states
+$\vert\pi_k\rangle\langle\pi_k\vert$ are the asymptotically stable
+fixed points, consistent with einselection (Sec.~\ref{sec:decoherence}).
+\end{proof}
+
+\begin{remark}[Qubit simulation]
+Figure~\ref{fig:affinity-decay} illustrates Eq.~\eqref{eq:alpha-decay}
+for a qubit ($d = 2$) initialized in the equal superposition
+$\vert\psi_0\rangle = (\vert\pi_0\rangle + \vert\pi_1\rangle)/\sqrt{2}$,
+giving $\bar{\alpha}(0) = 1$, under dephasing at rate $\gamma = 0.10$.
+The exponential decay $\bar{\alpha}(t) = e^{-0.10\,t}$ is exact under
+the Markovian approximation; details of the numerical simulation appear
+in Sec.~\ref{sec:simulation}.
+\end{remark}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\columnwidth]{fig1_affinity_decay}
+\caption{Decay of the scalar affinity $\bar{\alpha}(t)$ for a qubit
+  initialized in $\vert+\rangle = (\vert\pi_0\rangle
+  + \vert\pi_1\rangle)/\sqrt{2}$ under Markovian dephasing at rate
+  $\gamma = 0.10$.
+  The solid curve is the analytic result
+  $\bar{\alpha}(t) = e^{-\gamma t}$ (Proposition~\ref{prop:determination});
+  circles show values from the numerical density-matrix simulation of
+  Sec.~\ref{sec:simulation}.
+  The dashed line marks $\bar{\alpha} = 0$, the classical limit of
+  complete decoherence.}
+\label{fig:affinity-decay}
+\end{figure}
+
+% ── III.D  Proposition III ───────────────────────────────────────────────────
 
 \subsection{\label{sec:prop3}Proposition~III:
             Coherence--Affinity Correspondence}
 
-% TODO: Full development in next pass.
-% Claim: \bar{alpha} = 1 <=> maximal entanglement of rho_{SE};
-%        \bar{alpha} = 0 <=> complete decoherence into pointer basis.
-% Proof strategy: direct computation from Defs.~\ref{def:alpha-tensor}
-% and \ref{def:alpha-scalar}; continuity argument for intermediate values.
+\begin{proposition}[Coherence--Affinity Correspondence]
+\label{prop:correspondence}
+The scalar affinity satisfies $\bar{\alpha}(S,E) \in [0,1]$, with:
+\begin{enumerate}
+  \item[\emph{(i)}] $\bar{\alpha}(S,E) = 0$ if and only if $\rho_S$
+    is diagonal in the pointer basis (complete decoherence);
+  \item[\emph{(ii)}] $\bar{\alpha}(S,E) = 1$ if and only if $\rho_S$
+    is a pure state of the form
+    $\vert\psi\rangle = d^{-1/2}\sum_k e^{i\phi_k}\vert\pi_k\rangle$
+    for real phases $\phi_k$ (equal-weight pointer-basis superposition);
+  \item[\emph{(iii)}] $\bar{\alpha}(S,E;t)$ is continuous in $t$ and
+    monotonically non-increasing under the dephasing evolution of
+    Proposition~\ref{prop:determination}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Range.}
+Since $\rho_S \geq 0$ and $\mathrm{Tr}[\rho_S] = 1$, the Cauchy--Schwarz
+inequality gives
+$\lvert\rho_{ij}\rvert^2 \leq \rho_{ii}\,\rho_{jj}$ for all $i,\,j$.
+Summing over $i \neq j$:
+\begin{equation*}
+  \bigl\lVert\alpha\bigr\rVert_F^2
+  \;=\; \sum_{i\neq j}\lvert\rho_{ij}\rvert^2
+  \;\leq\; \sum_{i\neq j}\rho_{ii}\,\rho_{jj}
+  \;=\; \Bigl(\sum_k\rho_{kk}\Bigr)^2 - \sum_k\rho_{kk}^2
+  \;=\; 1 - \sum_k\rho_{kk}^2
+  \;\leq\; \frac{d-1}{d},
+\end{equation*}
+where the last step uses $\sum_k\rho_{kk}^2 \geq 1/d$ by the
+power-mean inequality.
+Multiplying by $d/(d-1)$ and taking the square root gives
+$\bar{\alpha} \leq 1$.
+Non-negativity is immediate from the definition.
+
+\emph{Part (i).}
+$\bar{\alpha} = 0 \Leftrightarrow \lVert\alpha\rVert_F = 0
+\Leftrightarrow \rho_{ij} = 0$ for all $i \neq j
+\Leftrightarrow \rho_S$ diagonal in pointer basis.
+
+\emph{Part (ii).}
+$\bar{\alpha} = 1$ requires equality throughout the range bound.
+The Cauchy--Schwarz equality $\lvert\rho_{ij}\rvert^2 = \rho_{ii}\rho_{jj}$
+holds iff $\rho_S$ is a rank-one projector (pure state).
+The power-mean equality $\sum_k\rho_{kk}^2 = 1/d$ holds iff
+$\rho_{kk} = 1/d$ for all $k$.
+Together these require $\rho_S = \vert\psi\rangle\langle\psi\vert$
+with $\lvert\langle\pi_k\vert\psi\rangle\rvert^2 = 1/d$, i.e.,
+$\vert\psi\rangle = d^{-1/2}\sum_k e^{i\phi_k}\vert\pi_k\rangle$.
+
+\emph{Part (iii).}
+Continuity follows from the continuity of $\rho_{ij}(t) = \rho_{ij}(0)e^{-\gamma t}$.
+Monotonicity follows from $\bar{\alpha}(t) = \bar{\alpha}(0)e^{-\gamma t}$
+and $\gamma > 0$.
+\end{proof}
+
+\begin{remark}[Affinity vs.\ entanglement]
+\label{rem:affinity-vs-entanglement}
+A potential source of confusion merits explicit comment.
+$\bar{\alpha}$ measures the quantum coherence of the \emph{local}
+reduced state $\rho_S$ in the pointer basis; it is \emph{not}
+a measure of bipartite entanglement between $S$ and $E$.
+Indeed, $\bar{\alpha}(S,E) = 1$ corresponds to a pure superposition of
+pointer states that $E$ has not yet correlated with --- in a product
+initial state $\vert\psi_0\rangle_S\vert 0\rangle_E$, this is the
+state of \emph{zero} $S$-$E$ entanglement.
+As decoherence proceeds and $\bar{\alpha}$ decreases toward zero,
+$S$-$E$ entanglement grows (see Proposition~\ref{prop:conservation}).
+The two quantities are inversely related along the decoherence
+trajectory, which is made precise in Proposition~\ref{prop:conservation}.
+\end{remark}
+
+% ── III.E  Proposition IV ────────────────────────────────────────────────────
 
 \subsection{\label{sec:prop4}Proposition~IV:
             Conservation of Relational Potential}
 
-% TODO: Full development in next pass.
-% Claim: In a closed system S+E, total quantum information is conserved;
-% decoherence of S transfers coherence to S-E correlations, not destroys it.
-% Proof strategy: unitary evolution of rho_{SE}; purity argument;
-% relate to quantum mutual information I(S:E).
+\begin{proposition}[Conservation of Relational Potential]
+\label{prop:conservation}
+Let $S{+}E$ be a closed system evolving unitarily from a pure initial
+state $\rho_{SE}(0) = \vert\psi_0\rangle\langle\psi_0\vert$.
+\begin{enumerate}
+  \item[\emph{(i)}] \emph{Purity conservation.}
+    $\mathrm{Tr}[\rho_{SE}(t)^2] = 1$ for all $t \geq 0$.
+  \item[\emph{(ii)}] \emph{Mutual information growth.}
+    The quantum mutual information
+    $I(S\!:\!E;\,t) = 2\,S(\rho_S(t))$
+    is non-decreasing, where $S(\cdot)$ is the von Neumann entropy.
+  \item[\emph{(iii)}] \emph{Coherence transfer.}
+    Under pointer-basis dephasing, as $\bar{\alpha}(S,E;\,t)$ decreases,
+    the off-diagonal coherences of $\rho_S$ are encoded in the growing
+    distinguishability of the pointer-correlated environmental branches
+    $\{\vert E_k(t)\rangle\}$, not annihilated.
+    Specifically, if $\vert\psi(t)\rangle = \sum_k c_k\,
+    \vert\pi_k\rangle\vert E_k(t)\rangle$, then
+    \begin{equation}
+    \label{eq:coherence-transfer}
+      \langle\pi_i\vert\rho_S(t)\vert\pi_j\rangle
+      \;=\; c_i\,c_j^*\;\langle E_j(t)\vert E_i(t)\rangle,
+      \qquad i \neq j,
+    \end{equation}
+    so that $\bar{\alpha}(t) \to 0$ as and only as
+    $\langle E_j(t)\vert E_i(t)\rangle \to 0$ for all $i \neq j$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\emph{Part (i).}
+Unitary evolution $\rho_{SE}(t) = U(t)\rho_{SE}(0)U^\dagger(t)$
+preserves the spectrum of $\rho_{SE}$, hence its purity
+$\mathrm{Tr}[\rho_{SE}^2]$.
+Since $\rho_{SE}(0)$ is rank-one, $\mathrm{Tr}[\rho_{SE}(0)^2] = 1$,
+and the result follows.
+
+\emph{Part (ii).}
+For a pure bipartite state $\rho_{SE}$, the Schmidt decomposition
+gives $S(\rho_S) = S(\rho_E)$ and
+$S(\rho_{SE}) = 0$.
+Hence $I(S\!:\!E) = S(\rho_S) + S(\rho_E) - S(\rho_{SE})
+= 2\,S(\rho_S)$.
+As decoherence increases the mixedness of $\rho_S$
+(off-diagonal elements decay while populations are preserved by
+pointer-basis dephasing), $S(\rho_S)$ is non-decreasing.
+
+\emph{Part (iii).}
+Write the evolved joint state as
+$\vert\psi(t)\rangle = \sum_k c_k\,\vert\pi_k\rangle\vert E_k(t)\rangle$,
+where $c_k = \langle\pi_k\vert\psi_0\rangle$ and $\{\vert E_k(t)\rangle\}$
+are the time-evolved environmental branches (not necessarily orthonormal).
+The reduced density matrix is
+\begin{equation*}
+  \rho_S(t) = \mathrm{Tr}_E\!\bigl[\vert\psi(t)\rangle\langle\psi(t)\vert\bigr]
+  = \sum_{i,j} c_i c_j^*\,\langle E_j(t)\vert E_i(t)\rangle\,
+    \vert\pi_i\rangle\langle\pi_j\vert,
+\end{equation*}
+from which Eq.~\eqref{eq:coherence-transfer} follows directly.
+The Markovian approximation leading to Eq.~\eqref{eq:alpha-decay}
+replaces $\langle E_j(t)\vert E_i(t)\rangle \approx e^{-\gamma t}$,
+reflecting the exponential loss of overlap as the environmental
+branches become distinguishable.
+When $\langle E_j(t)\vert E_i(t)\rangle = 0$ for all $i \neq j$,
+the joint state is a fully branched Schmidt decomposition and $S$
+has acquired a definite pointer-state record in $E$; no coherence
+has been destroyed --- it has been distributed into the
+orthogonality structure of $\{\vert E_k\rangle\}$.
+\end{proof}
+
+\begin{remark}[Implications for quantum error correction]
+Proposition~\ref{prop:conservation} has a direct bearing on the
+design of the $\URA$ gate (Sec.~\ref{sec:ura}).
+Because decoherence transfers, rather than destroys, relational
+structure, a gate that maximizes $\bar{\alpha}$ effectively
+harvests coherence before it disperses into environmental branches.
+The conservation law quantifies the recovery potential: at time $t$,
+the coherence remaining in $\rho_S$ is precisely
+$\bar{\alpha}(t) = \bar{\alpha}(0)\,e^{-\gamma t}$, setting
+a hard upper bound on what any unitary operation on $S$ alone
+can restore without access to $E$.
+\end{remark}

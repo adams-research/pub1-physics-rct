@@ -12,7 +12,11 @@
 *.blg
 *.bcf
 *.run.xml
+# Build PDF (gitignored)
 *.pdf
+
+# But track figure assets
+!figures/*.pdf
 *.dvi
 *.ps
 *.eps
