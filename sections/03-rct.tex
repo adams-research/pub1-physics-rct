@@ -301,7 +301,8 @@ The scalar affinity satisfies $\bar{\alpha}(S,E) \in [0,1]$, with:
     for real phases $\phi_k$ (equal-weight pointer-basis superposition);
   \item[\emph{(iii)}] $\bar{\alpha}(S,E;t)$ is continuous in $t$ and
     monotonically non-increasing under the dephasing evolution of
-    Proposition~\ref{prop:determination}.
+    Proposition~\ref{prop:determination}, strictly decreasing whenever
+    $\bar{\alpha}(S,E;0) > 0$.
 \end{enumerate}
 \end{proposition}
 
@@ -424,11 +425,13 @@ For a pure bipartite state $\rho_{SE}$, the Schmidt decomposition
 gives $S(\rho_S) = S(\rho_E)$ and $S(\rho_{SE}) = 0$, hence
 $I(S\!:\!E) = S(\rho_S) + S(\rho_E) - S(\rho_{SE}) = 2\,S(\rho_S)$.
 Under the pointer-basis-coupling Hamiltonian above, the induced channel
-on $\rho_S$ between any two times $t_1 < t_2$ is mixed-unitary
-(equivalently, unital: $\sum_k L_k^\dagger L_k = \gamma\,\mathbf{I}$, so
-the dual channel preserves the maximally mixed state), and therefore
-contractive on the spectrum of $\rho_S$ in the majorization
-order~\cite{NielsenChuang2000}.
+on $\rho_S$ between any two times $t_1 < t_2$ preserves diagonal
+populations in the pointer basis [part~(iii) below; equivalently, in
+the Markovian limit of Prop.~\ref{prop:determination},
+$\sum_k L_k^\dagger L_k = \gamma\,\mathbf{I}$], and is therefore
+unital: it preserves the maximally mixed state.
+Unital channels mix the spectrum in the majorization order,
+$\lambda(\rho_S(t_2)) \prec \lambda(\rho_S(t_1))$~\cite{NielsenChuang2000}.
 Since von Neumann entropy is Schur-concave, $S(\rho_S(t))$ is
 non-decreasing in $t$, and consequently so is $I(S\!:\!E;\,t)$.
 

@@ -77,16 +77,24 @@ Distinct observers may assign different, mutually consistent quantum
 states to the same system without contradiction, because those states are
 relational facts, not absolute ones.
 
-Formally, the quantum state $\rho(S \vert O)$ is indexed to the
-observing system $O$.
+In Rovelli's notation, a quantum state is indexed to the observing
+system: states are facts relative to interactions, not absolute
+properties of $S$ alone.
+For the mathematical work in this paper we adopt the standard joint
+and reduced density-operator notation $\rho_{SE}$ and
+$\rho_S = \mathrm{Tr}_E[\rho_{SE}]$ (Sec.~\ref{sec:rct},
+Definition~\ref{def:rho}); the relational indexing enters not through
+a separate notational object but through the einselected pointer basis
+in which the Affinity Tensor is defined.
 The relational network $\Gamma_S$ encodes the set of systems
 with which $S$ has exchanged interactions, and it is this network that
 determines which properties of $S$ are actualized and for whom.
 In the present work $\Gamma_S$ is treated as a collection of
 interaction events rather than a full graph-theoretic structure: the
 Affinity Tensor and its scalar summary defined in
-Sec.~\ref{sec:rct} depend only on the joint state $\rho_{SE}$ at
-the time of evaluation, so the temporal ordering of prior interaction
+Sec.~\ref{sec:rct} depend on the joint state $\rho_{SE}$ at the time
+of evaluation together with the pointer basis fixed by the
+$S$-$E$ Hamiltonian, so the temporal ordering of prior interaction
 events does not enter the present formalism.
 The extension to a weighted interaction graph, in which edge weights
 carry coupling strengths and event order may matter, is reserved for
@@ -194,8 +202,9 @@ processors operating under non-negligible noise.
 
 A critical question remains: in which basis do the coherences of
 Eq.~\eqref{eq:decoherence-decay} decay?
-An arbitrary environmental coupling would merely rotate a superposition
-without destroying it.
+A unitary basis change can rotate any decohering basis into another, so
+without a physical mechanism that singles out a preferred basis the
+off-diagonal-decay statement is ambiguous.
 Zurek's theory of \emph{einselection} (environment-induced
 superselection)~\cite{Zurek2003} answers this from first principles
 and is essential to grounding the Affinity Tensor defined in
@@ -283,9 +292,10 @@ von Neumann entropy of the reduced state and $d = \dim \mathcal{H}_S$;
 under the unitary $S{+}E$ evolution of Sec.~\ref{sec:rct}, $S(\rho_S)$
 coincides with the bipartite entanglement entropy between $S$ and $E$
 (Proposition~\ref{prop:conservation}, part~(ii)).
-This is why $\bar{\alpha}$, not $S$-$E$ entanglement, is the appropriate
-control parameter for the $\URA$ gate of Sec.~\ref{sec:gate}: the gate
-must act on the coherence still locally available in $S$ before that
-coherence is irretrievably distributed into the environment.
+The scalar affinity $\bar{\alpha}$ is therefore the figure of merit
+for tracking how much local pointer-basis coherence remains in
+$\rho_S$ at any moment in a circuit's execution, distinct from
+quantities such as concurrence or $S$-$E$ entanglement entropy that
+characterize the joint state.
 The Affinity Tensor tracks exactly this trajectory, and the
 Relational Coherence Theorem formalizes it.
