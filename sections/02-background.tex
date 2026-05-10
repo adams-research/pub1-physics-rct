@@ -1,55 +1,110 @@
 % ── SECTION 2: BACKGROUND (~800 words) ───────────────────────────────────────
-% Bell's theorem, relational QM, decoherence theory, entanglement measures.
 
 \section{Background}
 \label{sec:background}
 
 \subsection{Bell's Theorem and the End of Local Realism}
 
-% TODO: Bell 1964 → CHSH 1969 → Aspect 1982 → Zeilinger 2022.
-% Key result: no local hidden variables; quantum properties not intrinsic.
-
 Bell's theorem~\cite{Bell1964} proves that no theory of local hidden variables
-can reproduce the statistical predictions of quantum mechanics.
-The CHSH inequality~\cite{CHSH1969}, violated in Aspect's experiments~\cite{Aspect1982}
-and confirmed with loophole-free precision by Zeilinger and
-colleagues~\cite{Zeilinger2023Nobel}, establishes that quantum particles
-cannot possess determinate properties independently of measurement.
+can reproduce all statistical predictions of quantum mechanics.
+The argument is straightforward: if quantum particles possessed definite
+pre-existing values for every observable~---~the hidden variable
+hypothesis~---~those values would have to satisfy a set of linear inequalities
+(the Bell inequalities) on the correlations between distant measurement outcomes.
+Quantum mechanics predicts violations of these inequalities for entangled states.
+
+The testable form due to Clauser, Horne, Shimony, and Holt~\cite{CHSH1969},
+$|\mathcal{S}| = |E(a,b) - E(a,b') + E(a',b) + E(a',b')| \leq 2$,
+was violated experimentally by Aspect and colleagues~\cite{Aspect1982}
+and subsequently confirmed with all major loopholes closed by Hensen
+\emph{et al.}\ and by Giustina \emph{et al.}\ in 2015, culminating in the
+Nobel Prize-cited experiments of Zeilinger and colleagues~\cite{Zeilinger2023Nobel}.
+The maximum quantum violation, $|\mathcal{S}| = 2\sqrt{2}$ (the Tsirelson bound),
+is achieved by maximally entangled two-qubit states.
+
+The physical implication is unambiguous: quantum particles do not possess
+determinate properties prior to and independently of measurement.
+Properties are not intrinsic to systems; they are relational~---~they emerge
+through interaction.
+This result~---~local hidden variable theories are false~---~is among the
+most precisely confirmed facts in physics.
+The \RCT~takes this conclusion as its foundational premise.
 
 \subsection{Relational Quantum Mechanics}
 
-% TODO: Rovelli 1996 + Helgoland 2021.
-% Key point: quantum states are always observer-relative, never absolute.
-% Measurement event as actualization of relational potential.
+Rovelli's relational quantum mechanics (RQM)~\cite{Rovelli1996,Rovelli2021}
+radicalizes the implication of Bell's theorem at the level of quantum states
+themselves.
+In RQM, the quantum state $\ket{\psi}_{S/O}$ of system $S$ is defined only
+relative to observer $O$~---~never absolutely.
+A second observer $O'$, not yet correlated with the measurement outcome,
+consistently assigns a different state to~$S$.
+Neither description is more fundamental; both are valid relative to their
+respective observational contexts.
 
-Rovelli's relational quantum mechanics~\cite{Rovelli1996,Rovelli2021} proposes
-that quantum states are always defined relative to an observer or physical system,
-never absolutely.
-The state $\ket{\psi}_{S/O}$ describes system $S$ relative to observer $O$;
-a different observer $O'$ may assign a different state consistently.
-The measurement event is the moment when relational interaction actualizes
-a definite outcome from a superposition of possibilities.
+The measurement event, in RQM, is the moment when a relational interaction
+actualizes a definite outcome: it is not a collapse of an objective wave
+function, but the establishment of a definite fact \emph{relative to} the
+interacting system.
+This account dissolves the measurement problem without invoking hidden variables,
+many worlds, or epistemic fictions~---~it does so by taking the relational
+character of quantum facts seriously as a feature of reality, not a limitation
+of knowledge.
+
+The critical lacuna in RQM, as its author acknowledges~\cite{Rovelli2021},
+is the absence of a formal mathematical structure that makes relational
+affinity~---~the degree of coherent coupling between systems~---~a computable,
+dynamical quantity with experimentally testable consequences.
+The \RCT~provides this structure.
 
 \subsection{Decoherence and the Quantum-to-Classical Transition}
 
-% TODO: Zurek 2003 (pointer basis, einselection), von Neumann 1932.
-% Environmental coupling suppresses off-diagonal elements of density matrix.
-
 Environmental decoherence~\cite{Zurek2003} describes how quantum superpositions
-effectively become classical mixtures through entanglement with environmental
-degrees of freedom.
-For system $S$ coupled to environment $E$, the reduced density matrix
-$\rhoSE = \mathrm{Tr}_E[\ket{\psi_{SE}}\bra{\psi_{SE}}]$
-loses off-diagonal coherence as $S$-$E$ entanglement grows.
+are suppressed through entanglement with environmental degrees of freedom.
+For system $S$ in a pure state $\ket{\psi_S}$ coupled to environment $E$,
+the joint evolution produces an entangled state $\ket{\psi_{SE}}$.
+The reduced density matrix of $S$,
+\begin{equation}
+  \rho_S = \mathrm{Tr}_E\bigl[\ket{\psi_{SE}}\bra{\psi_{SE}}\bigr],
+\end{equation}
+transitions from a pure state (with nonzero off-diagonal elements) to an
+effectively mixed state (with suppressed off-diagonal elements) as
+$S$-$E$ entanglement grows.
+This suppression of coherence is not collapse~---~the full state
+$\ket{\psi_{SE}}$ remains pure~---~but the \emph{relational coherence} of
+$S$ with respect to any local observer is destroyed.
+
+Zurek's einselection mechanism~\cite{Zurek2003} identifies a preferred
+``pointer basis'' selected by the system-environment interaction Hamiltonian,
+into which superpositions decohere.
+The \RCT~reframes decoherence as the decay of the Affinity Tensor~$\alpha$
+from its maximal value (full relational participation) to zero
+(classical separability), providing a single scalar dynamical variable
+that tracks the transition.
 
 \subsection{Entanglement Measures}
 
-% TODO: von Neumann entropy, concurrence (Wootters 1998).
-% Relate to the Affinity Tensor in Section 3.
+Several measures quantify bipartite entanglement for two-qubit states.
+The von Neumann entropy of entanglement,
+\begin{equation}
+  S(\rho_S) = -\mathrm{Tr}\bigl[\rho_S \log_2 \rho_S\bigr],
+  \label{eq:vN-entropy}
+\end{equation}
+measures entanglement for pure bipartite states~\cite{vonNeumann1932,NielsenChuang2000}.
+For mixed states, the concurrence~\cite{Wootters1998}
+\begin{equation}
+  \mathcal{C}(\rho) = \max\bigl(0,\, \lambda_1 - \lambda_2 - \lambda_3 - \lambda_4\bigr),
+  \label{eq:concurrence}
+\end{equation}
+where $\lambda_i$ are the square roots of the eigenvalues (in decreasing order)
+of $\rho(\sigma_y \otimes \sigma_y)\rho^*(\sigma_y \otimes \sigma_y)$,
+provides an entanglement monotone defined on the full state space.
 
-Established entanglement measures include the von Neumann entropy
-$S(\rho) = -\mathrm{Tr}[\rho \log_2 \rho]$~\cite{vonNeumann1932}
-and the concurrence $\mathcal{C}(\rho)$~\cite{Wootters1998}.
-The Affinity Tensor $\alpha$ introduced in Section~\ref{sec:rct}
-is related to these measures but defined operationally to track
-relational coherence dynamics under noise.
+The Affinity Tensor~$\alpha(S,E)$ introduced in Section~\ref{sec:rct} is
+related to these measures but defined for a different purpose.
+While $S(\rho)$ and $\mathcal{C}(\rho)$ quantify entanglement at an instant,
+$\alpha(t)$ is constructed to track the \emph{dynamics} of relational coherence
+under environmental coupling~---~making it operationally suited to characterizing
+gate performance in realistic noisy devices.
+Section~\ref{sec:rct} establishes the precise relationship between $\bar\alpha$,
+$\mathcal{C}$, and the off-diagonal structure of the relational density matrix.
